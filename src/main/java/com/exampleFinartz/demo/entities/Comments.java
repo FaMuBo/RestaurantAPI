@@ -35,8 +35,6 @@ public class Comments {
     @ManyToOne
     @JoinColumn(name = "branch_id", nullable = false)
     private Branch branch;
-
-
 }
 
 

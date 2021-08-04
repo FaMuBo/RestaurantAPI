@@ -32,6 +32,4 @@ public class Basket {
 
     @OneToMany
     private List<Orders> orders;
-
-
 }

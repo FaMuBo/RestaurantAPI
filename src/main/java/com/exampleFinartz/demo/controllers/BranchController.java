@@ -2,6 +2,7 @@ package com.exampleFinartz.demo.controllers;
 
 
 import com.exampleFinartz.demo.entities.Branch;
+import com.exampleFinartz.demo.enums.Position;
 import com.exampleFinartz.demo.services.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class BranchController {
 
     @GetMapping("/waiting")
     public ResponseEntity<List<Branch>> getWaiting() {
-        return new ResponseEntity(branchService.getByStatus(), HttpStatus.OK);
+        return new ResponseEntity(branchService.getByStatus(Position.WAITING), HttpStatus.OK);
     }
 
     @PutMapping

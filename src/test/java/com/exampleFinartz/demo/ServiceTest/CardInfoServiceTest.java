@@ -37,7 +37,7 @@ public class CardInfoServiceTest {
         List<CardInfo> cardInfoList = Arrays.asList(cardInfo1, cardInfo2);
         Mockito.when(cardInfoRepository.findAll()).thenReturn(cardInfoList);
 
-        List<CardInfo> fetchedList = cardInfoService.findAll();
+        List<CardInfo> fetchedList = cardInfoService.getAll();
         assertEquals(cardInfoList.size(), fetchedList.size());
     }
 

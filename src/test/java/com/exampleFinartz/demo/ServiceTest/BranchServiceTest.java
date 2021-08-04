@@ -80,5 +80,4 @@ public class BranchServiceTest {
         Assertions.assertEquals(existBranch.getPosition(), NewStatus);
         Assertions.assertNotEquals(existBranch.getPosition(), InitStatus);
     }
-
 }

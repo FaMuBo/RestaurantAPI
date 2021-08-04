@@ -81,6 +81,4 @@ public class BasketServiceTest {
         Assertions.assertEquals(existBasket.getTotalPrice(), TOTAL_PRICE_128);
 
     }
-
-
 }

@@ -28,7 +28,5 @@ public class County {
 
     @OneToOne
     private Address address;
-
-
 }
 

@@ -41,5 +41,4 @@ public class BasketController {
         basketService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

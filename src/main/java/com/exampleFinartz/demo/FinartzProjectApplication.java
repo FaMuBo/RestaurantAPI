@@ -10,6 +10,4 @@ public class FinartzProjectApplication {
 
 		SpringApplication.run(FinartzProjectApplication.class, args);
 	}
-
-
 }

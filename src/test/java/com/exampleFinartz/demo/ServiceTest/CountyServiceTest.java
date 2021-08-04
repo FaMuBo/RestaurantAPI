@@ -79,7 +79,5 @@ public class CountyServiceTest {
 
         Assertions.assertNotEquals(existCounty.getName(), COUNTY_KARTAL);
         Assertions.assertEquals(existCounty.getName(), COUNTY_UMRANİYE);
-
     }
-
 }

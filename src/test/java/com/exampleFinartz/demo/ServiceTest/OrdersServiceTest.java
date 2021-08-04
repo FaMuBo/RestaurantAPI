@@ -60,5 +60,4 @@ public class OrdersServiceTest {
         Assertions.assertNotEquals(existOrder.getAmount(), 2);
         Assertions.assertEquals(existOrder.getAmount(), 3);
     }
-
 }
