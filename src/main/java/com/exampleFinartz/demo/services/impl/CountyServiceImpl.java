@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entities.County;
+import com.exampleFinartz.demo.entity.County;
 import com.exampleFinartz.demo.repositories.CountyRepository;
 import com.exampleFinartz.demo.services.CountyService;
 

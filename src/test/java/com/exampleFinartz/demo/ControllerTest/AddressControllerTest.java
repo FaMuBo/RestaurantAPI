@@ -1,10 +1,10 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.AddressController;
-import com.exampleFinartz.demo.entities.Address;
-import com.exampleFinartz.demo.entities.City;
-import com.exampleFinartz.demo.entities.County;
-import com.exampleFinartz.demo.entities.User;
+import com.exampleFinartz.demo.entity.Address;
+import com.exampleFinartz.demo.entity.City;
+import com.exampleFinartz.demo.entity.County;
+import com.exampleFinartz.demo.entity.User;
 import com.exampleFinartz.demo.repositories.AddressRepository;
 import com.exampleFinartz.demo.services.AddressService;
 import com.fasterxml.jackson.core.JsonProcessingException;

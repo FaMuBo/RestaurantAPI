@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.controllers;
 
 
-import com.exampleFinartz.demo.entities.Branch;
+import com.exampleFinartz.demo.entity.Branch;
 import com.exampleFinartz.demo.enums.Position;
 import com.exampleFinartz.demo.services.BranchService;
 import org.springframework.beans.factory.annotation.Autowired;

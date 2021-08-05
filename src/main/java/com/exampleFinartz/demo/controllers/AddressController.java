@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.controllers;
 
 
-import com.exampleFinartz.demo.entities.Address;
+import com.exampleFinartz.demo.entity.Address;
 import com.exampleFinartz.demo.services.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

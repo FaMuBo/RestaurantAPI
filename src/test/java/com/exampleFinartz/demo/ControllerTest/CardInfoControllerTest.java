@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.CardInfoController;
-import com.exampleFinartz.demo.entities.CardInfo;
+import com.exampleFinartz.demo.entity.CardInfo;
 import com.exampleFinartz.demo.repositories.CardInfoRepository;
 import com.exampleFinartz.demo.services.CardInfoService;
 import com.fasterxml.jackson.core.JsonProcessingException;

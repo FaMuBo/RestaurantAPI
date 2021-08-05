@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.MenuController;
-import com.exampleFinartz.demo.entities.Menu;
+import com.exampleFinartz.demo.entity.Menu;
 import com.exampleFinartz.demo.repositories.MenuRepository;
 import com.exampleFinartz.demo.services.MenuService;
 import com.fasterxml.jackson.core.JsonProcessingException;

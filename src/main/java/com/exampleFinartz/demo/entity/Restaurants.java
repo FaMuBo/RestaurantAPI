@@ -1,4 +1,4 @@
-package com.exampleFinartz.demo.entities;
+package com.exampleFinartz.demo.entity;
 
 import com.exampleFinartz.demo.enums.Position;
 import lombok.AllArgsConstructor;
@@ -10,13 +10,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Table(name = "RESTAURANTS")
+@Table(name = "restaurants")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Builder
 //USER_id nasıl tutturulmalı sor
-public class Restaurants {
+public class Restaurants extends BaseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

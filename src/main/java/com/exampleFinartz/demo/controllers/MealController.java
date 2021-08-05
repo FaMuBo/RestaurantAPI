@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.controllers;
 
 
-import com.exampleFinartz.demo.entities.Meal;
+import com.exampleFinartz.demo.entity.Meal;
 import com.exampleFinartz.demo.services.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

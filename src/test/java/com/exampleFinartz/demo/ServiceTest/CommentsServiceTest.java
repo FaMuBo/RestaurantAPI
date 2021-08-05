@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.ServiceTest;
 
-import com.exampleFinartz.demo.entities.Comments;
+import com.exampleFinartz.demo.entity.Comments;
 import com.exampleFinartz.demo.repositories.CommentsRepository;
 import com.exampleFinartz.demo.services.CommentsService;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.CityController;
-import com.exampleFinartz.demo.entities.City;
+import com.exampleFinartz.demo.entity.City;
 import com.exampleFinartz.demo.repositories.CityRepository;
 import com.exampleFinartz.demo.services.CityService;
 import com.fasterxml.jackson.core.JsonProcessingException;

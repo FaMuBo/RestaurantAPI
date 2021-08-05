@@ -1,4 +1,4 @@
-package com.exampleFinartz.demo.entities;
+package com.exampleFinartz.demo.entity;
 
 import com.exampleFinartz.demo.enums.Role;
 import lombok.AllArgsConstructor;
@@ -10,13 +10,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Table(name = "USER")
+@Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Builder
 
-public class User {
+public class User extends BaseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

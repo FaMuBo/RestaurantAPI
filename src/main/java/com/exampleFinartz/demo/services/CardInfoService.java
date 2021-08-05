@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entities.CardInfo;
+import com.exampleFinartz.demo.entity.CardInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

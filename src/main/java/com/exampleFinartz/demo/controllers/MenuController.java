@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entities.Menu;
+import com.exampleFinartz.demo.entity.Menu;
 import com.exampleFinartz.demo.services.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entities.Orders;
+import com.exampleFinartz.demo.entity.Orders;
 import com.exampleFinartz.demo.repositories.OrdersRepository;
 import com.exampleFinartz.demo.services.OrdersService;
 

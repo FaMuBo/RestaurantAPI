@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.RestaurantsController;
-import com.exampleFinartz.demo.entities.Restaurants;
+import com.exampleFinartz.demo.entity.Restaurants;
 import com.exampleFinartz.demo.repositories.RestaurantsRepository;
 import com.exampleFinartz.demo.services.RestaurantsService;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entities.Comments;
+import com.exampleFinartz.demo.entity.Comments;
 import com.exampleFinartz.demo.repositories.CommentsRepository;
 import com.exampleFinartz.demo.services.CommentsService;
 

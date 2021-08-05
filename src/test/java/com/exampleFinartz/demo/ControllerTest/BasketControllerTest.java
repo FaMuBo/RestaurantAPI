@@ -1,8 +1,8 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.BasketController;
-import com.exampleFinartz.demo.entities.Basket;
-import com.exampleFinartz.demo.entities.User;
+import com.exampleFinartz.demo.entity.Basket;
+import com.exampleFinartz.demo.entity.User;
 import com.exampleFinartz.demo.repositories.BasketRepository;
 import com.exampleFinartz.demo.services.BasketService;
 import com.fasterxml.jackson.core.JsonProcessingException;

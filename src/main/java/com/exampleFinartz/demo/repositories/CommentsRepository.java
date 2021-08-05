@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.repositories;
 
-import com.exampleFinartz.demo.entities.Comments;
+import com.exampleFinartz.demo.entity.Comments;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

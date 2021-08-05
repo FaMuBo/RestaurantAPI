@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.ServiceTest;
 
 
-import com.exampleFinartz.demo.entities.Orders;
+import com.exampleFinartz.demo.entity.Orders;
 import com.exampleFinartz.demo.repositories.OrdersRepository;
 import com.exampleFinartz.demo.services.OrdersService;
 import org.junit.Test;

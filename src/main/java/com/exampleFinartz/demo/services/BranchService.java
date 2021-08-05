@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entities.Branch;
+import com.exampleFinartz.demo.entity.Branch;
 import com.exampleFinartz.demo.enums.Position;
 
 import java.util.List;
@@ -24,6 +24,8 @@ public interface BranchService {
     public List<Branch> getByStatus(Position position);
 
     String delete(Long id);
+
+    public List<Branch> getWaitingBranchList(Position position);
 
 }
 

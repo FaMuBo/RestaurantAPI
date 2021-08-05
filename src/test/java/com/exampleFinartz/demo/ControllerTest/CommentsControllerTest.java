@@ -1,8 +1,8 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.CommentsController;
-import com.exampleFinartz.demo.entities.Branch;
-import com.exampleFinartz.demo.entities.Comments;
+import com.exampleFinartz.demo.entity.Branch;
+import com.exampleFinartz.demo.entity.Comments;
 import com.exampleFinartz.demo.repositories.CommentsRepository;
 import com.exampleFinartz.demo.services.CommentsService;
 import com.fasterxml.jackson.core.JsonProcessingException;

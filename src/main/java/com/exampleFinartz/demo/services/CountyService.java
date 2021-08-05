@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entities.County;
+import com.exampleFinartz.demo.entity.County;
 
 import java.util.List;
 

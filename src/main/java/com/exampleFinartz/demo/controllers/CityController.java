@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entities.City;
+import com.exampleFinartz.demo.entity.City;
 import com.exampleFinartz.demo.services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

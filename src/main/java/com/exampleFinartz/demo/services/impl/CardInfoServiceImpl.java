@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entities.CardInfo;
+import com.exampleFinartz.demo.entity.CardInfo;
 import com.exampleFinartz.demo.repositories.CardInfoRepository;
 import com.exampleFinartz.demo.services.CardInfoService;
 

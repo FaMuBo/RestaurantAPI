@@ -1,4 +1,4 @@
-package com.exampleFinartz.demo.entities;
+package com.exampleFinartz.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +9,12 @@ import javax.persistence.*;
 
 @Data
 @Builder
-@Table(name = "ADDRESS")
+@Table(name = "address")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 
-public class Address {
+public class Address extends BaseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -45,6 +45,4 @@ public class Address {
     private Branch branch;
 
 }
-
-
 

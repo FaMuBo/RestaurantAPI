@@ -1,4 +1,4 @@
-package com.exampleFinartz.demo.entities;
+package com.exampleFinartz.demo.entity;
 
 import com.exampleFinartz.demo.enums.Position;
 import com.exampleFinartz.demo.enums.Role;
@@ -12,12 +12,12 @@ import java.util.List;
 
 @Data
 @Builder
-@Table(name = "ŞUBE")
+@Table(name = "branch")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 //restaurant menü idler
-public class Branch {
+public class Branch extends BaseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -38,7 +38,7 @@ public class Branch {
     private int taste_rate;
 
     @Column(name = "vote_count")
-    private int vote_count;
+    private int vote_rate;
 
     @Column(name = "comment_count")
     private int comment_count;

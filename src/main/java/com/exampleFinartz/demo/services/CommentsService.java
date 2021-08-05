@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entities.Comments;
+import com.exampleFinartz.demo.entity.Comments;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

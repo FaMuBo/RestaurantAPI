@@ -2,7 +2,7 @@ package com.exampleFinartz.demo.ControllerTest;
 
 
 import com.exampleFinartz.demo.controllers.ItemController;
-import com.exampleFinartz.demo.entities.Item;
+import com.exampleFinartz.demo.entity.Item;
 import com.exampleFinartz.demo.repositories.ItemRepository;
 import com.exampleFinartz.demo.services.ItemService;
 import com.fasterxml.jackson.core.JsonProcessingException;

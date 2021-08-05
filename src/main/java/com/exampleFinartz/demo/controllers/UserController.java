@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entities.Branch;
-import com.exampleFinartz.demo.entities.User;
+import com.exampleFinartz.demo.entity.Branch;
+import com.exampleFinartz.demo.entity.User;
 import com.exampleFinartz.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

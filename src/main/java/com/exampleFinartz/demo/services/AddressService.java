@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.services;
 
 
-import com.exampleFinartz.demo.entities.Address;
+import com.exampleFinartz.demo.entity.Address;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

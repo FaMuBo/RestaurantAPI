@@ -1,4 +1,4 @@
-package com.exampleFinartz.demo.entities;
+package com.exampleFinartz.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,30 +9,27 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
-@Table(name = "MENÜ")
+@Table(name = "basket")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Builder
-//enable ,şube id koyulmadı nasıl tutturulacak?
-public class Menu {
+
+public class Basket extends BaseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "item_count")
-    private int item_count;
-
+    @Column(name = "totalPrice")
+    private Double totalPrice;
 
     @OneToMany
-    private List<Meal> meallistt;
+    private List<Meal> mealList;
 
     @OneToOne
-    @JoinColumn(name = "branch_id")
-    private Branch branch;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToMany
-    private List<Meal> meal;
-
-
+    private List<Orders> orders;
 }

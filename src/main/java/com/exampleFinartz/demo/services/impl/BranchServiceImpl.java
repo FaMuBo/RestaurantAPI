@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entities.Branch;
+import com.exampleFinartz.demo.entity.Branch;
 import com.exampleFinartz.demo.enums.Position;
 import com.exampleFinartz.demo.repositories.BranchRepository;
 import com.exampleFinartz.demo.services.BranchService;
@@ -73,6 +73,12 @@ public class BranchServiceImpl implements BranchService {
     public List<Branch> getWaitingBranchList() {
 
         return branchRepository.findAllByPosition(Position.WAITING);
+    }
+
+    @Override
+    public List<Branch> getWaitingBranchList(Position position) {
+
+        return branchRepository.findAllByPosition(position.WAITING);
     }
 
     @Override

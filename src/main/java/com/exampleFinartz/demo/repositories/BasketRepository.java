@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.repositories;
 
 
-import com.exampleFinartz.demo.entities.Basket;
+import com.exampleFinartz.demo.entity.Basket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

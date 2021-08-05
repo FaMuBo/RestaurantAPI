@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.ServiceTest;
 
-import com.exampleFinartz.demo.entities.Menu;
+import com.exampleFinartz.demo.entity.Menu;
 import com.exampleFinartz.demo.repositories.MenuRepository;
 import com.exampleFinartz.demo.services.MenuService;
 import org.junit.Test;

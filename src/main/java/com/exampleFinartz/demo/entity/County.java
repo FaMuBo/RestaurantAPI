@@ -1,4 +1,4 @@
-package com.exampleFinartz.demo.entities;
+package com.exampleFinartz.demo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,25 +6,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Builder
-@Table(name = "city")
+@Table(name = "county")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class City {
+
+public class County extends BaseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "city_name")
+    @Column(name = "name")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
 
     @OneToOne
     private Address address;
-
-    @OneToMany
-    private List<County> county;
 }
+

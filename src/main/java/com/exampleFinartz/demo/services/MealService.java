@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entities.Meal;
+import com.exampleFinartz.demo.entity.Meal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

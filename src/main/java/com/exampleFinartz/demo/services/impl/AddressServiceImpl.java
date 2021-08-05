@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entities.Address;
+import com.exampleFinartz.demo.entity.Address;
 import com.exampleFinartz.demo.repositories.AddressRepository;
 import com.exampleFinartz.demo.services.AddressService;
 import org.springframework.stereotype.Service;

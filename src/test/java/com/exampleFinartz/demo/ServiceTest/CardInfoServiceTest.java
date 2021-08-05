@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.ServiceTest;
 
 
-import com.exampleFinartz.demo.entities.CardInfo;
+import com.exampleFinartz.demo.entity.CardInfo;
 import com.exampleFinartz.demo.repositories.CardInfoRepository;
 import com.exampleFinartz.demo.services.CardInfoService;
 import org.junit.Test;

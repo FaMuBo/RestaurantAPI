@@ -1,8 +1,9 @@
 package com.exampleFinartz.demo.ControllerTest;
 
 import com.exampleFinartz.demo.controllers.BranchController;
-import com.exampleFinartz.demo.entities.Branch;
-import com.exampleFinartz.demo.entities.Menu;
+import com.exampleFinartz.demo.entity.Branch;
+import com.exampleFinartz.demo.entity.Menu;
+import com.exampleFinartz.demo.enums.Position;
 import com.exampleFinartz.demo.repositories.BranchRepository;
 import com.exampleFinartz.demo.services.BranchService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -120,7 +121,7 @@ public class BranchControllerTest {
         String URI = "/branch/waiting";
         String inputJson = this.mapToJson(branchList);
 
-        Mockito.when(branchService.getWaitingBranchList()).thenReturn(branchList);
+        Mockito.when(branchService.getWaitingBranchList(Position.WAITING)).thenReturn(branchList);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get(URI)

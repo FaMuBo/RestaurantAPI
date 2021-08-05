@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entities.Restaurants;
+import com.exampleFinartz.demo.entity.Restaurants;
 import com.exampleFinartz.demo.services.RestaurantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

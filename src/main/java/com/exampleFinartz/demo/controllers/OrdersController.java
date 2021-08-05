@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.controllers;
 
 
-import com.exampleFinartz.demo.entities.Orders;
+import com.exampleFinartz.demo.entity.Orders;
 import com.exampleFinartz.demo.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

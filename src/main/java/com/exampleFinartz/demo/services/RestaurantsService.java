@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entities.Restaurants;
+import com.exampleFinartz.demo.entity.Restaurants;
 import com.exampleFinartz.demo.enums.Position;
 import org.springframework.stereotype.Service;
 

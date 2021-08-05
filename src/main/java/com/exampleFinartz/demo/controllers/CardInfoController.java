@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entities.CardInfo;
+import com.exampleFinartz.demo.entity.CardInfo;
 import com.exampleFinartz.demo.services.CardInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

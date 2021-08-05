@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.ServiceTest;
 
-import com.exampleFinartz.demo.entities.City;
+import com.exampleFinartz.demo.entity.City;
 import com.exampleFinartz.demo.repositories.CityRepository;
 import com.exampleFinartz.demo.services.CityService;
 import org.junit.Test;

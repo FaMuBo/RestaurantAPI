@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.repositories;
 
-import com.exampleFinartz.demo.entities.Restaurants;
+import com.exampleFinartz.demo.entity.Restaurants;
 import com.exampleFinartz.demo.enums.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
