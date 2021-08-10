@@ -1,24 +1,15 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.Meal;
+import com.exampleFinartz.demo.models.dto.MealDTO;
+import com.exampleFinartz.demo.models.request.create.MealCreateRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface MealService {
 
-    public Meal create(Meal meal);
 
-    public List<Meal> getAll();
+    MealDTO getMeal(Long id);
 
-    public Meal getById(Long id);
-
-    public Meal update(Meal meal);
-
-    public Meal deleteById(Long id);
-
-    String delete(Long id);
-
+    MealDTO createMeal(MealCreateRequest mealCreateRequest);
 
 }

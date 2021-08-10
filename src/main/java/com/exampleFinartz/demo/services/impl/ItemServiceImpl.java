@@ -1,64 +1,54 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Item;
+import com.exampleFinartz.demo.models.converter.dto.ItemDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.ItemCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.ItemDTO;
+import com.exampleFinartz.demo.models.entity.ItemEntity;
+import com.exampleFinartz.demo.models.request.create.ItemCreateRequest;
 import com.exampleFinartz.demo.repositories.ItemRepository;
 import com.exampleFinartz.demo.services.ItemService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-
-    private ItemRepository itemRepository;
-
-    public ItemServiceImpl(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
-    }
+    private final ItemRepository itemRepository;
+    private final ItemDtoConverter itemDtoConverter;
+    private final ItemCreateRequestToEntityConverter itemCreateRequestToEntityConverter;
 
     @Override
-    public Item create(Item item) {
-        Item save = itemRepository.save(item);
-        return save;
-    }
+    public List<ItemDTO> getItems(Integer pageNo, Integer pageSize, String sortBy) {
 
-    @Override
-    public List<Item> getAll() {
-        List<Item> items = itemRepository.findAll();
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<ItemEntity> itemEntityPage = itemRepository.findAll(paging);
+        List<ItemDTO> items = new ArrayList<>();
+        itemEntityPage.forEach(itemEntity -> {
+            items.add(itemDtoConverter.convert(itemEntity));
+        });
         return items;
     }
 
-    @Override
-    public Item getById(Long id) {
-        Item item = itemRepository.getById(id);
-        return item;
-    }
+//    @Override
+//    public ItemDTO getItem(Long id){
+//        return itemDtoConverter.convert(itemRepository.findById(id).orElseThrow(
+//                () -> new ResourceNotFoundException("Not found Item with id: " + id)
+//        ));
+//    }
 
     @Override
-    public Item update(Item item) {
-        Item foundItem = itemRepository.getById(item.getId());
-        if (item.getName() != null) {
-            foundItem.setName(item.getName());
-        }
-        if (item.getMealList() != null) {
-            foundItem.setMealList(item.getMealList());
-        }
-        return itemRepository.save(item);
-    }
-
-    @Override
-    public Item deleteById(Long id) {
-        Item ıtem = itemRepository.getById(id);
-        if (ıtem != null) {
-            itemRepository.deleteById(id);
-            return ıtem;
-        }
-        return ıtem;
-    }
-
-    @Override
-    public String delete(Long id) {
-        itemRepository.deleteById(id);
-        return "SUCCESS";
+    public ItemDTO createItem(ItemCreateRequest itemCreateRequest) {
+        ItemEntity itemEntity = itemCreateRequestToEntityConverter.convert(itemCreateRequest);
+        return itemDtoConverter.convert(itemRepository.save(itemEntity));
     }
 
 }

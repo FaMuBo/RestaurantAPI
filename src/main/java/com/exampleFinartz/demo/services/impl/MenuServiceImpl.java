@@ -1,66 +1,46 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Menu;
+import com.exampleFinartz.demo.models.converter.dto.MenuDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.MenuCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromUpdateRequest.MenuUpdateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.MenuDTO;
+import com.exampleFinartz.demo.models.entity.MenuEntity;
+import com.exampleFinartz.demo.models.request.create.MenuCreateRequest;
+import com.exampleFinartz.demo.models.request.update.MenuUpdateRequest;
 import com.exampleFinartz.demo.repositories.MenuRepository;
 import com.exampleFinartz.demo.services.MenuService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class MenuServiceImpl implements MenuService {
 
-    private MenuRepository menuRepository;
+    private final MenuRepository menuRepository;
+    private final MenuDtoConverter menuDtoConverter;
+    private final MenuCreateRequestToEntityConverter menuCreateRequestToEntityConverter;
+    private final MenuUpdateRequestToEntityConverter menuUpdateRequestToEntityConverter;
 
-    public MenuServiceImpl(MenuRepository menuRepository) {
-        this.menuRepository = menuRepository;
+
+    @Override
+    public MenuDTO getMenu(Long id) {
+        return menuDtoConverter.convert(menuRepository.getById(id));
     }
 
     @Override
-    public Menu create(Menu menu) {
-        Menu save = menuRepository.save(menu);
-        return save;
+    public MenuDTO createMenu(MenuCreateRequest menuCreateRequest) {
+        MenuEntity menuEntity = menuCreateRequestToEntityConverter.convert(menuCreateRequest);
+        return menuDtoConverter.convert(menuRepository.save(menuEntity));
     }
 
     @Override
-    public List<Menu> getAll() {
-        List<Menu> menus = menuRepository.findAll();
-        return menus;
+    public MenuDTO updateMenu(Long id, MenuUpdateRequest menuUpdateRequest) {
+        MenuEntity menuExisted = menuRepository.getById(id);
+
+        MenuEntity menuUpdated =
+                menuUpdateRequestToEntityConverter.convert(menuUpdateRequest, menuExisted);
+
+        return menuDtoConverter.convert(menuRepository.save(menuUpdated));
     }
 
-    @Override
-    public Menu getById(Long id) {
-        Menu menu = menuRepository.getById(id);
-        return menu;
-    }
-
-    @Override
-    public Menu update(Menu menu) {
-        Menu foundMenu = menuRepository.getById(menu.getId());
-        if (menu.getBranch() != null) {
-            foundMenu.setBranch(menu.getBranch());
-        }
-        if (menu.getMeal() != null) {
-            foundMenu.setMeal(menu.getMeal());
-        }
-        if (menu.getMeallistt() != null) {
-            foundMenu.setMeallistt(menu.getMeallistt());
-        }
-
-        return menuRepository.save(menu);
-    }
-
-    @Override
-    public Menu deleteById(Long id) {
-        Menu menu = menuRepository.getById(id);
-        if (menu != null) {
-            menuRepository.deleteById(id);
-            return menu;
-        }
-        return menu;
-    }
-
-    @Override
-    public String delete(Long id) {
-        menuRepository.deleteById(id);
-        return "SUCCESS";
-    }
 }

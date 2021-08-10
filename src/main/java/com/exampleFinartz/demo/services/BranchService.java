@@ -1,7 +1,9 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.Branch;
-import com.exampleFinartz.demo.enums.Position;
+import com.exampleFinartz.demo.models.dto.BranchDTO;
+import com.exampleFinartz.demo.models.enums.Position;
+import com.exampleFinartz.demo.models.request.create.BranchCreateRequest;
+import com.exampleFinartz.demo.models.request.update.BranchUpdateRequest;
 
 import java.util.List;
 
@@ -9,23 +11,16 @@ import java.util.List;
 
 public interface BranchService {
 
-    public Branch create(Branch branch);
+    BranchDTO getBranch(Long id);
 
-    public List<Branch> getAll();
+    List<BranchDTO> getBranches(Position position);
 
-    public Branch getById(Long id);
+    List<BranchDTO> getBranches(Long countyId);
 
-    public List<Branch> findByAddress_County_Id(Long county_id);
+    BranchDTO createBranch(BranchCreateRequest branchCreateRequest);
 
-    public Branch update(Branch branch);
+    BranchDTO updateBranch(Long id, BranchUpdateRequest branchUpdateRequest);
 
-    public Branch deleteById(Long id);
-
-    public List<Branch> getByStatus(Position position);
-
-    String delete(Long id);
-
-    public List<Branch> getWaitingBranchList(Position position);
 
 }
 

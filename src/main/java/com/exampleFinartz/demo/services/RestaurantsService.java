@@ -1,7 +1,9 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.Restaurants;
-import com.exampleFinartz.demo.enums.Position;
+import com.exampleFinartz.demo.models.dto.RestaurantsDTO;
+import com.exampleFinartz.demo.models.enums.Position;
+import com.exampleFinartz.demo.models.request.create.RestaurantsCreateRequest;
+import com.exampleFinartz.demo.models.request.update.RestaurantsUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,17 +11,11 @@ import java.util.List;
 @Service
 public interface RestaurantsService {
 
-    public Restaurants create(Restaurants restaurants);
+    List<RestaurantsDTO> getRestaurants(Position position);
 
-    public List<Restaurants> getAll();
+    RestaurantsDTO getRestaurant(Long id);
 
-    public Restaurants getById(Long id);
+    RestaurantsDTO createRestaurants(RestaurantsCreateRequest restaurantsCreateRequest);
 
-    public List<Restaurants> getByStatus(Position position);
-
-    public Restaurants update(Restaurants restaurants);
-
-    public Restaurants deleteById(Long id);
-
-    String delete(Long id);
+    RestaurantsDTO updateRestaurants(Long id, RestaurantsUpdateRequest restaurantsUpdateRequest);
 }

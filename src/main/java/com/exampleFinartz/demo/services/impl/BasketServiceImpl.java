@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Basket;
+import com.exampleFinartz.demo.models.entity.BasketEntity;
 import com.exampleFinartz.demo.repositories.BasketRepository;
 import com.exampleFinartz.demo.services.BasketService;
 import org.springframework.stereotype.Service;
@@ -17,40 +17,40 @@ public class BasketServiceImpl implements BasketService {
     }
 
     @Override
-    public Basket create(Basket basket) {
-        Basket save = basketRepository.save(basket);
+    public BasketEntity create(BasketEntity basketEntity) {
+        BasketEntity save = basketRepository.save(basketEntity);
         return save;
     }
 
     @Override
-    public List<Basket> getAll() {
-        List<Basket> baskets = basketRepository.findAll();
-        return baskets;
+    public List<BasketEntity> getAll() {
+        List<BasketEntity> basketEntities = basketRepository.findAll();
+        return basketEntities;
     }
 
     @Override
-    public Basket getById(Long id) {
-        Basket basket = basketRepository.getById(id);
-        return basket;
+    public BasketEntity getById(Long id) {
+        BasketEntity basketEntity = basketRepository.getById(id);
+        return basketEntity;
     }
 
     @Override
-    public Basket update(Basket basket) {
-        Basket foundBasket = basketRepository.getById(basket.getId());
-        if (basket.getTotalPrice() != null) {
-            foundBasket.setTotalPrice(basket.getTotalPrice());
+    public BasketEntity update(BasketEntity basketEntity) {
+        BasketEntity foundBasketEntity = basketRepository.getById(basketEntity.getId());
+        if (basketEntity.getTotalPrice() != null) {
+            foundBasketEntity.setTotalPrice(basketEntity.getTotalPrice());
         }
-        return basketRepository.save(basket);
+        return basketRepository.save(basketEntity);
     }
 
     @Override
-    public Basket deleteById(Long id) {
-        Basket basket = basketRepository.getById(id);
-        if (basket != null) {
+    public BasketEntity deleteById(Long id) {
+        BasketEntity basketEntity = basketRepository.getById(id);
+        if (basketEntity != null) {
             basketRepository.deleteById(id);
-            return basket;
+            return basketEntity;
         }
-        return basket;
+        return basketEntity;
     }
 
     @Override

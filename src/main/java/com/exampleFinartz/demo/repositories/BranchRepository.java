@@ -1,18 +1,17 @@
 package com.exampleFinartz.demo.repositories;
 
 
-import com.exampleFinartz.demo.entity.Branch;
-import com.exampleFinartz.demo.enums.Position;
+import com.exampleFinartz.demo.models.entity.BranchEntity;
+import com.exampleFinartz.demo.models.enums.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface BranchRepository extends JpaRepository<Branch, Long> {
+public interface BranchRepository extends JpaRepository<BranchEntity, Long> {
 
-    List<Branch> findAllByPosition(Position position);
+    List<BranchEntity> getBranchEntitiesByPosition(Position position);
 
-    List<Branch> findByAddress_County_Id(Long county_id);
-
+    List<BranchEntity> getBranchEntitiesByAddressEntity_CountyEntity_Id(Long countyId);
 }

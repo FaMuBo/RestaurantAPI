@@ -1,44 +1,27 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entity.County;
+import com.exampleFinartz.demo.models.dto.CountyDTO;
 import com.exampleFinartz.demo.services.CountyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/county")
+@RequestMapping("county")
 public class CountyController {
 
-    @Autowired
-    private CountyService countyService;
+    private final CountyService countyService;
 
-    @PostMapping
-    public ResponseEntity<County> create(@RequestBody County county) {
-        return new ResponseEntity<County>(countyService.create(county), HttpStatus.CREATED);
-    }
-
-    @PutMapping
-    public ResponseEntity<County> update(@RequestBody County county) {
-        return new ResponseEntity<County>(countyService.update(county), HttpStatus.OK);
+    public CountyController(CountyService countyService) {
+        this.countyService = countyService;
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<County> get(@PathVariable Long id) {
-        return new ResponseEntity<County>(countyService.getById(id), HttpStatus.OK);
+    public ResponseEntity<CountyDTO> getCounty(@PathVariable Long id) {
+        return new ResponseEntity(countyService.getCounty(id), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<County>> getAll() {
-        return new ResponseEntity<>(countyService.getAll(), HttpStatus.OK);
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<?> deleteById(@PathVariable Long id) {
-        countyService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }

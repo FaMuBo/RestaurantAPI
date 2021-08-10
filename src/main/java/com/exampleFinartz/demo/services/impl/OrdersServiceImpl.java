@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Orders;
+import com.exampleFinartz.demo.models.entity.OrdersEntity;
 import com.exampleFinartz.demo.repositories.OrdersRepository;
 import com.exampleFinartz.demo.services.OrdersService;
 
@@ -16,46 +16,46 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public Orders create(Orders orders) {
-        Orders save = ordersRepository.save(orders);
+    public OrdersEntity create(OrdersEntity ordersEntity) {
+        OrdersEntity save = ordersRepository.save(ordersEntity);
         return save;
     }
 
     @Override
-    public List<Orders> getAll() {
-        List<Orders> ordersList = ordersRepository.findAll();
-        return ordersList;
+    public List<OrdersEntity> getAll() {
+        List<OrdersEntity> ordersEntityList = ordersRepository.findAll();
+        return ordersEntityList;
     }
 
     @Override
-    public Orders getById(Long id) {
-        Orders orders = ordersRepository.getById(id);
-        return orders;
+    public OrdersEntity getById(Long id) {
+        OrdersEntity ordersEntity = ordersRepository.getById(id);
+        return ordersEntity;
     }
 
     @Override
-    public Orders update(Orders orders) {
-        Orders foundOrder = ordersRepository.getById(orders.getId());
-        if (orders.getAmount() != 0) {
-            foundOrder.setAmount(orders.getAmount());
+    public OrdersEntity update(OrdersEntity ordersEntity) {
+        OrdersEntity foundOrder = ordersRepository.getById(ordersEntity.getId());
+        if (ordersEntity.getAmount() != 0) {
+            foundOrder.setAmount(ordersEntity.getAmount());
         }
-        if (orders.getBasket() != null) {
-            foundOrder.setBasket(orders.getBasket());
+        if (ordersEntity.getBasketEntity() != null) {
+            foundOrder.setBasketEntity(ordersEntity.getBasketEntity());
         }
-        if (orders.getDate() != null) {
-            foundOrder.setDate(orders.getDate());
+        if (ordersEntity.getDate() != null) {
+            foundOrder.setDate(ordersEntity.getDate());
         }
-        return ordersRepository.save(orders);
+        return ordersRepository.save(ordersEntity);
     }
 
     @Override
-    public Orders deleteById(Long id) {
-        Orders orders = ordersRepository.getById(id);
-        if (orders != null) {
+    public OrdersEntity deleteById(Long id) {
+        OrdersEntity ordersEntity = ordersRepository.getById(id);
+        if (ordersEntity != null) {
             ordersRepository.deleteById(id);
-            return orders;
+            return ordersEntity;
         }
-        return orders;
+        return ordersEntity;
     }
 
     @Override

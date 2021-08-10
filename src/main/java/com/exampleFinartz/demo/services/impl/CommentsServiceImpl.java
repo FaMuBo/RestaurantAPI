@@ -1,60 +1,52 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Comments;
+import com.exampleFinartz.demo.models.converter.dto.CommentsDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.CommentsCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromUpdateRequest.CommentUpdateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.CommentsDTO;
+import com.exampleFinartz.demo.models.entity.CommentsEntity;
+import com.exampleFinartz.demo.models.request.create.CommentsCreateRequest;
+import com.exampleFinartz.demo.models.request.update.CommentsUpdateRequest;
 import com.exampleFinartz.demo.repositories.CommentsRepository;
 import com.exampleFinartz.demo.services.CommentsService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class CommentsServiceImpl implements CommentsService {
 
-    private CommentsRepository commentRepository;
+    private final CommentsRepository commentsRepository;
+    private final CommentsDtoConverter commentsDtoConverter;
+    private final CommentsCreateRequestToEntityConverter commentsCreateRequestToEntityConverter;
+    private final CommentUpdateRequestToEntityConverter commentsUpdateRequestToEntityConverter;
 
-    public CommentsServiceImpl(CommentsRepository commentRepository) {
-        this.commentRepository = commentRepository;
+
+    @Override
+    public CommentsDTO getComments(Long id) {
+        CommentsEntity commentsEntity = commentsRepository.getById(id);
+        return commentsDtoConverter.convert(commentsEntity);
     }
 
     @Override
-    public Comments create(Comments comments) {
-        Comments save = commentRepository.save(comments);
-        return save;
+    public CommentsDTO createComments(CommentsCreateRequest commentsCreateRequest) {
+        CommentsEntity commentsEntity = commentsCreateRequestToEntityConverter.convert(commentsCreateRequest);
+        return commentsDtoConverter.convert(commentsRepository.save(commentsEntity));
     }
 
     @Override
-    public List<Comments> getAll() {
-        List<Comments> comments = commentRepository.findAll();
-        return comments;
+    public CommentsDTO updateComments(Long id, CommentsUpdateRequest commentsUpdateRequest) {
+        CommentsEntity commentsExisted = commentsRepository.getById(id);
+
+        CommentsEntity commentsUpdated =
+                commentsUpdateRequestToEntityConverter.convert(commentsUpdateRequest, commentsExisted);
+
+        return commentsDtoConverter.convert(commentsRepository.save(commentsUpdated));
+
     }
 
     @Override
-    public Comments getById(Long id) {
-        Comments comments = commentRepository.getById(id);
-        return comments;
+    public void deleteComments(Long id) {
+        commentsRepository.deleteById(id);
     }
-
-    @Override
-    public Comments update(Comments comments) {
-        Comments foundComments = commentRepository.getById(comments.getId());
-        if (comments.getComment() != null) {
-            foundComments.setComment(comments.getComment());
-        }
-        return commentRepository.save(comments);
-    }
-
-    @Override
-    public Comments deleteById(Long id) {
-        Comments comments = commentRepository.getById(id);
-        if (comments != null) {
-            commentRepository.deleteById(id);
-            return comments;
-        }
-        return comments;
-    }
-
-    @Override
-    public String delete(Long id) {
-        commentRepository.deleteById(id);
-        return "SUCCESS";
-    }
-
 }

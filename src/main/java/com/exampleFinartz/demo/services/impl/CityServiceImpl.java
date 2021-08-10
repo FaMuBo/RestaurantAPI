@@ -1,63 +1,39 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.City;
+import com.exampleFinartz.demo.models.converter.dto.CityDtoConverter;
+import com.exampleFinartz.demo.models.dto.CityDTO;
+import com.exampleFinartz.demo.models.entity.CityEntity;
 import com.exampleFinartz.demo.repositories.CityRepository;
 import com.exampleFinartz.demo.services.CityService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CityServiceImpl implements CityService {
+
     private final CityRepository cityRepository;
 
-    public CityServiceImpl(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
+    private final CityDtoConverter cityDtoConverter;
+
+    @Override
+    public CityDTO getCity(Long id) {
+        CityEntity cityEntity = cityRepository.getById(id);
+        return cityDtoConverter.convert(cityEntity);
     }
 
     @Override
-    public City create(City city) {
-        City save = cityRepository.save(city);
-        return save;
-    }
-
-    @Override
-    public List<City> getAll() {
-        List<City> cities = cityRepository.findAll();
+    public List<CityDTO> getCities() {
+        List<CityEntity> cityEntities = cityRepository.findAll();
+        List<CityDTO> cities = new ArrayList<>();
+        cityEntities.forEach(cityEntity -> {
+            cities.add(cityDtoConverter.convert(cityEntity));
+        });
         return cities;
     }
 
-    @Override
-    public City getById(Long id) {
-        City city = cityRepository.getById(id);
-        return city;
-    }
 
-    @Override
-    public City update(City city) {
-        City foundCity = cityRepository.getById(city.getId());
-        if (city.getCounty() != null) {
-            foundCity.setCounty(city.getCounty());
-        }
-        if (city.getName() != null) {
-            foundCity.setName(city.getName());
-        }
-        return cityRepository.save(city);
-    }
-
-    @Override
-    public City deleteById(Long id) {
-        City city = cityRepository.getById(id);
-        if (city != null) {
-            cityRepository.deleteById(id);
-            return city;
-        }
-        return city;
-    }
-
-    @Override
-    public String delete(Long id) {
-        cityRepository.deleteById(id);
-        return "SUCCESS";
-    }
 }

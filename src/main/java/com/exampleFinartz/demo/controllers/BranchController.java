@@ -1,10 +1,11 @@
 package com.exampleFinartz.demo.controllers;
 
 
-import com.exampleFinartz.demo.entity.Branch;
-import com.exampleFinartz.demo.enums.Position;
+import com.exampleFinartz.demo.models.entity.BranchEntity;
+import com.exampleFinartz.demo.models.enums.Position;
+import com.exampleFinartz.demo.models.request.create.BranchCreateRequest;
+import com.exampleFinartz.demo.models.request.update.BranchUpdateRequest;
 import com.exampleFinartz.demo.services.BranchService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,41 +14,38 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/branch")
+@RequestMapping("branch")
 public class BranchController {
 
-    @Autowired
-    private BranchService branchService;
+    private final BranchService branchService;
+
+    public BranchController(BranchService branchService) {
+        this.branchService = branchService;
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<BranchEntity> getBranch(@PathVariable Long id) {
+        return new ResponseEntity(branchService.getBranch(id), HttpStatus.OK);
+    }
+
+    @GetMapping("waiting")
+    public ResponseEntity<List<BranchEntity>> getBranches(Position position) {
+        return new ResponseEntity(branchService.getBranches(position), HttpStatus.OK);
+    }
+
+    @GetMapping("by-county")
+    public ResponseEntity<List<BranchEntity>> getBranches(Long countyId) {
+        return new ResponseEntity(branchService.getBranches(countyId), HttpStatus.OK);
+    }
 
     @PostMapping
-    public ResponseEntity<Branch> create(@RequestBody Branch branch) {
-        return new ResponseEntity(branchService.create(branch), HttpStatus.CREATED);
+    public ResponseEntity<BranchEntity> createBranch(@RequestBody BranchCreateRequest branchCreateRequest) {
+        return new ResponseEntity(branchService.createBranch(branchCreateRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Branch>> getAll() {
-        return new ResponseEntity(branchService.getAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<List<Branch>> getById(@PathVariable Long id) {
-        return new ResponseEntity(branchService.getById(id), HttpStatus.OK);
-    }
-
-    @GetMapping("/waiting")
-    public ResponseEntity<List<Branch>> getWaiting() {
-        return new ResponseEntity(branchService.getByStatus(Position.WAITING), HttpStatus.OK);
-    }
-
-    @PutMapping
-    public ResponseEntity<Branch> update(@RequestBody Branch branch) {
-        return new ResponseEntity(branchService.update(branch), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Branch> deleteById(@PathVariable Long id) {
-        branchService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping("{id}")
+    public ResponseEntity<BranchEntity> updateBranch(@PathVariable Long id, @RequestBody BranchUpdateRequest branchUpdateRequest) {
+        return new ResponseEntity(branchService.updateBranch(id, branchUpdateRequest), HttpStatus.OK);
     }
 
 }

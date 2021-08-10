@@ -1,13 +1,11 @@
 package com.exampleFinartz.demo.repositories;
 
-import com.exampleFinartz.demo.entity.User;
+import com.exampleFinartz.demo.models.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    User findByEmail(String email);
-
-    User findByName(String name);
+    UserEntity findByEmail(String Email);
 }

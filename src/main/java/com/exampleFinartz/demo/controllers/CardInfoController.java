@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entity.CardInfo;
+import com.exampleFinartz.demo.models.entity.CardInfoEntity;
 import com.exampleFinartz.demo.services.CardInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,22 +18,22 @@ public class CardInfoController {
     private CardInfoService cardinfoService;
 
     @PostMapping
-    public ResponseEntity<CardInfo> create(@RequestBody CardInfo cardinfo) {
-        return new ResponseEntity<CardInfo>(cardinfoService.create(cardinfo), HttpStatus.CREATED);
+    public ResponseEntity<CardInfoEntity> create(@RequestBody CardInfoEntity cardinfo) {
+        return new ResponseEntity<CardInfoEntity>(cardinfoService.create(cardinfo), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<CardInfo> update(@RequestBody CardInfo cardinfo) {
-        return new ResponseEntity<CardInfo>(cardinfoService.update(cardinfo), HttpStatus.OK);
+    public ResponseEntity<CardInfoEntity> update(@RequestBody CardInfoEntity cardinfo) {
+        return new ResponseEntity<CardInfoEntity>(cardinfoService.update(cardinfo), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CardInfo> get(@PathVariable Long id) {
-        return new ResponseEntity<CardInfo>(cardinfoService.getById(id), HttpStatus.OK);
+    public ResponseEntity<CardInfoEntity> get(@PathVariable Long id) {
+        return new ResponseEntity<CardInfoEntity>(cardinfoService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<CardInfo>> getAll() {
+    public ResponseEntity<List<CardInfoEntity>> getAll() {
         return new ResponseEntity<>(cardinfoService.getAll(), HttpStatus.OK);
     }
 

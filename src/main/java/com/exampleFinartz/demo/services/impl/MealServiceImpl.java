@@ -1,63 +1,32 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Meal;
+import com.exampleFinartz.demo.models.converter.dto.MealDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.MealCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.MealDTO;
+import com.exampleFinartz.demo.models.entity.MealEntity;
+import com.exampleFinartz.demo.models.request.create.MealCreateRequest;
 import com.exampleFinartz.demo.repositories.MealRepository;
 import com.exampleFinartz.demo.services.MealService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class MealServiceImpl implements MealService {
 
+    private final MealRepository mealRepository;
+    private final MealDtoConverter mealDtoConverter;
+    private final MealCreateRequestToEntityConverter mealCreateRequestToEntityConverter;
 
-    private MealRepository mealRepository;
-
-    public MealServiceImpl(MealRepository mealRepository) {
-        this.mealRepository = mealRepository;
+    @Override
+    public MealDTO getMeal(Long id) {
+        return mealDtoConverter.convert(mealRepository.getById(id));
     }
 
     @Override
-    public Meal create(Meal meal) {
-        Meal save = mealRepository.save(meal);
-        return save;
+    public MealDTO createMeal(MealCreateRequest mealCreateRequest) {
+        MealEntity mealEntity = mealCreateRequestToEntityConverter.convert(mealCreateRequest);
+        return mealDtoConverter.convert(mealRepository.save(mealEntity));
     }
 
-    @Override
-    public List<Meal> getAll() {
-        List<Meal> meals = mealRepository.findAll();
-        return meals;
-    }
-
-    @Override
-    public Meal getById(Long id) {
-        Meal meal = mealRepository.getById(id);
-        return meal;
-    }
-
-    @Override
-    public Meal update(Meal meal) {
-        Meal foundMeal = mealRepository.getById(meal.getId());
-        if (meal.getName() != null) {
-            foundMeal.setName(meal.getName());
-        }
-        if (meal.getPrice() != 0) {
-            foundMeal.setName(meal.getName());
-        }
-        return mealRepository.save(meal);
-    }
-
-    @Override
-    public Meal deleteById(Long id) {
-        Meal meal = mealRepository.getById(id);
-        if (meal != null) {
-            mealRepository.deleteById(id);
-            return meal;
-        }
-        return meal;
-    }
-
-    @Override
-    public String delete(Long id) {
-        mealRepository.deleteById(id);
-        return "SUCCESS";
-    }
 }

@@ -1,19 +1,19 @@
 package com.exampleFinartz.demo.repositories;
 
 
-import com.exampleFinartz.demo.entity.Basket;
+import com.exampleFinartz.demo.models.entity.BasketEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface BasketRepository extends JpaRepository<Basket, Long> {
-    List<Basket> findAll();
+public interface BasketRepository extends JpaRepository<BasketEntity, Long> {
+    List<BasketEntity> findAll();
 
-    Basket save(Basket basket);
+    BasketEntity save(BasketEntity basketEntity);
 
-    Basket getById(Long id);
+    BasketEntity getById(Long id);
 
     void deleteById(Long id);
 }

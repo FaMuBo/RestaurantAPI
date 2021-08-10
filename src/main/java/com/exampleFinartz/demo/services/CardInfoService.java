@@ -1,21 +1,21 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.CardInfo;
+import com.exampleFinartz.demo.models.entity.CardInfoEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface CardInfoService {
-    public CardInfo create(CardInfo CardInfo);
+    public CardInfoEntity create(CardInfoEntity CardInfoEntity);
 
-    public List<CardInfo> getAll();
+    public List<CardInfoEntity> getAll();
 
-    public CardInfo getById(Long id);
+    public CardInfoEntity getById(Long id);
 
-    public CardInfo update(CardInfo CardInfo);
+    public CardInfoEntity update(CardInfoEntity CardInfoEntity);
 
-    public CardInfo deleteById(Long id);
+    public CardInfoEntity deleteById(Long id);
 
     String delete(Long id);
 }

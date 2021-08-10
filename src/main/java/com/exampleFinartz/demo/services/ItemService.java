@@ -1,23 +1,17 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.Item;
+import com.exampleFinartz.demo.models.dto.ItemDTO;
+import com.exampleFinartz.demo.models.request.create.ItemCreateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface ItemService {
-    public Item create(Item ıtem);
+    List<ItemDTO> getItems(Integer pageNo, Integer pageSize, String sortBy);
 
-    public List<Item> getAll();
+//    ItemDTO getItem(Long id);
 
-    public Item getById(Long id);
-
-    public Item update(Item ıtem);
-
-    public Item deleteById(Long id);
-
-    String delete(Long id);
-
+    ItemDTO createItem(ItemCreateRequest itemCreateRequest);
 
 }

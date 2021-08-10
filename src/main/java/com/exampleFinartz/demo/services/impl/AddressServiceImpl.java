@@ -1,73 +1,35 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Address;
+import com.exampleFinartz.demo.models.converter.dto.AddressDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.AddressCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.AddressDTO;
+import com.exampleFinartz.demo.models.entity.AddressEntity;
+import com.exampleFinartz.demo.models.request.create.AddressCreateRequest;
 import com.exampleFinartz.demo.repositories.AddressRepository;
 import com.exampleFinartz.demo.services.AddressService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
+    private final AddressDtoConverter addressDtoConverter;
+    private final AddressCreateRequestToEntityConverter addressCreateRequestToEntityConverter;
 
-    public AddressServiceImpl(AddressRepository addressRepository) {
-        this.addressRepository = addressRepository;
+    @Override
+    public AddressDTO getAddress(Long id) {
+        AddressEntity addressEntity = addressRepository.getById(id);
+        return addressDtoConverter.convert(addressEntity);
     }
 
     @Override
-    public Address create(Address address) {
-        Address save = addressRepository.save(address);
-        return save;
+    public AddressDTO createAddress(AddressCreateRequest addressCreateRequest) {
+        AddressEntity addressEntity = addressCreateRequestToEntityConverter.convert(addressCreateRequest);
+        return addressDtoConverter.convert(addressRepository.save(addressEntity));
     }
 
-    @Override
-    public List<Address> getAll() {
-        List<Address> addresses = addressRepository.findAll();
-        return addresses;
-    }
-
-    @Override
-    public Address getById(Long id) {
-        Address address = addressRepository.getById(id);
-        return address;
-    }
-
-    @Override
-    public Address update(Address address) {
-        Address foundAddress = addressRepository.getById(address.getId());
-        if (address.getCity() != null) {
-            foundAddress.setCity(address.getCity());
-        }
-        if (address.getCounty() != null) {
-            foundAddress.setCounty(address.getCounty());
-        }
-        if (address.getDistrict() != null) {
-            foundAddress.setDistrict(address.getDistrict());
-        }
-        if (address.getOther_content() != null) {
-            foundAddress.setOther_content(address.getOther_content());
-        }
-        return addressRepository.save(address);
-    }
-
-    @Override
-    public Address deleteById(Long id) {
-        Address address = addressRepository.getById(id);
-        if (address != null) {
-            addressRepository.deleteById(id);
-            return address;
-        }
-        return address;
-    }
-
-    @Override
-    public String delete(Long id) {
-        addressRepository.deleteById(id);
-        return "SUCCESS";
-    }
 }
-
 

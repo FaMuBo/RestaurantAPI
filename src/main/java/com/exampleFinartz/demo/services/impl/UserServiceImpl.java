@@ -1,94 +1,53 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.User;
+import com.exampleFinartz.demo.models.converter.dto.UserDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.UserCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.UserDTO;
+import com.exampleFinartz.demo.models.entity.UserEntity;
+import com.exampleFinartz.demo.models.request.create.UserCreateRequest;
 import com.exampleFinartz.demo.repositories.UserRepository;
 import com.exampleFinartz.demo.services.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final UserRepository userRepository;
+    // private final PasswordEncoder passwordEncoder;
+    private final UserDtoConverter userDtoConverter;
+    private final UserCreateRequestToEntityConverter userCreateRequestToEntityConverter;
 
-    private UserRepository userRepository;
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        UserEntity userEntity = userRepository.findByEmail(email);
+//        if(userEntity == null)
+//            throw new UsernameNotFoundException("User not found in database");
+//        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        userEntity.getRoles().forEach(role -> {
+//            authorities.add(new SimpleGrantedAuthority(role.toString()));
+//        });
+//        return new org.springframework.security.core.userdetails.User(userEntity.getEmail(), userEntity.getPassword(), authorities);
+//  }
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Override
+    public UserDTO getUser(Long id) {
+        return userDtoConverter.convert(userRepository.getById(id));
     }
 
     @Override
-    public User create(User user) {
-        return userRepository.save(user);
+    public UserDTO getUser(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+        return userDtoConverter.convert(userEntity);
     }
 
     @Override
-    public List<User> getAll() {
-        List<User> users = userRepository.findAll();
-        return users;
+    public UserDTO createUser(UserCreateRequest userCreateRequest) {
+        //userCreateRequest.setPassword(passwordEncoder.encode(userCreateRequest.getPassword()));
+        UserEntity userEntity = userCreateRequestToEntityConverter.convert(userCreateRequest);
+        return userDtoConverter.convert(userRepository.save(userEntity));
     }
 
-    @Override
-    public User getById(Long id) {
-        User user = userRepository.getById(id);
-        return user;
-    }
-
-    @Override
-    public User findByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        return user;
-    }
-
-    @Override
-    //değiştirrrr 0 ı
-    public User update(User user) {
-        User foundUser = userRepository.getById(user.getId());
-        if (user.getName() != null) {
-            foundUser.setName(user.getName());
-        }
-        if (user.getPassword() != 0) {
-            foundUser.setPassword(user.getPassword());
-        }
-        if (user.getEmail() != null) {
-            foundUser.setEmail(user.getEmail());
-        }
-        if (user.getCardi̇nfo() != null) {
-            foundUser.setCardi̇nfo(user.getCardi̇nfo());
-        }
-        if (user.getAdress() != null) {
-            foundUser.setAdress(user.getAdress());
-        }
-        if (user.getComments() != null) {
-            foundUser.setComments(user.getComments());
-        }
-        if (user.getRestaurants() != null) {
-            foundUser.setRestaurants(user.getRestaurants());
-        }
-        return userRepository.save(user);
-    }
-
-    @Override
-    public User deleteById(Long id) {
-        User user = userRepository.getById(id);
-        if (user != null) {
-            userRepository.deleteById(id);
-            return user;
-        }
-        return user;
-    }
-
-    @Override
-    public User getUserByName(String name) {
-        return userRepository.findByName(name);
-    }
-
-    @Override
-    public User getWaitingRestaurants() {
-        return null;
-    }
-
-    @Override
-    public String delete(Long id) {
-        userRepository.deleteById(id);
-        return "SUCCESS";
-    }
 }

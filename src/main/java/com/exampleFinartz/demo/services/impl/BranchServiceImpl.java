@@ -1,90 +1,68 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Branch;
-import com.exampleFinartz.demo.enums.Position;
+import com.exampleFinartz.demo.models.converter.dto.BranchDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.BranchCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromUpdateRequest.BranchUpdateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.BranchDTO;
+import com.exampleFinartz.demo.models.entity.BranchEntity;
+import com.exampleFinartz.demo.models.enums.Position;
+import com.exampleFinartz.demo.models.request.create.BranchCreateRequest;
+import com.exampleFinartz.demo.models.request.update.BranchUpdateRequest;
 import com.exampleFinartz.demo.repositories.BranchRepository;
 import com.exampleFinartz.demo.services.BranchService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BranchServiceImpl implements BranchService {
 
     private final BranchRepository branchRepository;
 
-    public BranchServiceImpl(BranchRepository branchRepository) {
-        this.branchRepository = branchRepository;
+    private final BranchCreateRequestToEntityConverter branchCreateRequestToEntityConverter;
+    private final BranchUpdateRequestToEntityConverter branchUpdateRequestToEntityConverter;
+    private final BranchDtoConverter branchDtoConverter;
+
+    @Override
+    public BranchDTO getBranch(Long id) {
+        return branchDtoConverter.convert(branchRepository.getById(id));
     }
 
     @Override
-    public Branch create(Branch branch) {
-        Branch save = branchRepository.save(branch);
-        return save;
-    }
-
-    @Override
-    public List<Branch> getAll() {
-        List<Branch> branches = branchRepository.findAll();
+    public List<BranchDTO> getBranches(Position position) {
+        List<BranchDTO> branches = new ArrayList<>();
+        branchRepository.getBranchEntitiesByPosition(position).forEach(branchEntity -> {
+            branches.add(branchDtoConverter.convert(branchEntity));
+        });
         return branches;
     }
 
     @Override
-    public Branch getById(Long id) {
-        return branchRepository.getById(id);
+    public List<BranchDTO> getBranches(Long countyId) {
+        List<BranchDTO> branches = new ArrayList<>();
+        branchRepository.getBranchEntitiesByAddressEntity_CountyEntity_Id(countyId).forEach(branchEntity -> {
+            branches.add(branchDtoConverter.convert(branchEntity));
+        });
+        return branches;
     }
 
     @Override
-    public List<Branch> getByStatus(Position position) {
-        return branchRepository.findAllByPosition(position);
+    public BranchDTO createBranch(BranchCreateRequest branchCreateRequest) {
+        BranchEntity branchEntity = branchCreateRequestToEntityConverter.convert(branchCreateRequest);
+        return branchDtoConverter.convert(branchRepository.save(branchEntity));
     }
 
     @Override
-    public Branch update(Branch branch) {
-        Branch foundBranch = branchRepository.getById(branch.getId());
-        if (branch.getPosition() != null) {
-            foundBranch.setPosition(branch.getPosition());
-        }
-        if (branch.getName() != null) {
-            foundBranch.setName(branch.getName());
-        }
-        if (branch.getRole() != null) {
-            foundBranch.setRole(branch.getRole());
-        }
-        return branchRepository.save(branch);
-    }
+    public BranchDTO updateBranch(Long id, BranchUpdateRequest branchUpdateRequest) {
+        BranchEntity branchExisted = branchRepository.getById(id);
 
-    @Override
-    public Branch deleteById(Long id) {
-        Branch branch = branchRepository.getById(id);
-        if (branch != null) {
-            branchRepository.deleteById(id);
-            return branch;
-        }
-        return branch;
-    }
+        BranchEntity branchUpdated =
+                branchUpdateRequestToEntityConverter.convert(branchUpdateRequest, branchExisted);
 
-    @Override
-    public List<Branch> findByAddress_County_Id(Long county_id) {
-
-        return branchRepository.findByAddress_County_Id(county_id);
-    }
-
-    public List<Branch> getWaitingBranchList() {
-
-        return branchRepository.findAllByPosition(Position.WAITING);
-    }
-
-    @Override
-    public List<Branch> getWaitingBranchList(Position position) {
-
-        return branchRepository.findAllByPosition(position.WAITING);
-    }
-
-    @Override
-    public String delete(Long id) {
-        branchRepository.deleteById(id);
-        return "SUCCESS";
+        return branchDtoConverter.convert(branchRepository.save(branchUpdated));
     }
 }
 

@@ -1,8 +1,10 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entity.Restaurants;
+import com.exampleFinartz.demo.models.dto.RestaurantsDTO;
+import com.exampleFinartz.demo.models.enums.Position;
+import com.exampleFinartz.demo.models.request.create.RestaurantsCreateRequest;
+import com.exampleFinartz.demo.models.request.update.RestaurantsUpdateRequest;
 import com.exampleFinartz.demo.services.RestaurantsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,35 +12,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping("restaurant")
 public class RestaurantsController {
 
-    @Autowired
-    private RestaurantsService restaurantService;
+    private final RestaurantsService restaurantsService;
 
-    @PostMapping
-    public ResponseEntity<Restaurants> create(@RequestBody Restaurants restaurants) {
-        return new ResponseEntity<Restaurants>(restaurantService.create(restaurants), HttpStatus.CREATED);
+    public RestaurantsController(RestaurantsService restaurantsService) {
+        this.restaurantsService = restaurantsService;
     }
 
-    @PutMapping
-    public ResponseEntity<Restaurants> update(@RequestBody Restaurants restaurants) {
-        return new ResponseEntity<Restaurants>(restaurantService.update(restaurants), HttpStatus.OK);
+    @GetMapping("waiting")
+    public ResponseEntity<List<RestaurantsDTO>> getRestaurants(Position position) {
+        return new ResponseEntity(restaurantsService.getRestaurants(position.WAITING), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Restaurants> get(@PathVariable Long id) {
-        return new ResponseEntity<Restaurants>(restaurantService.getById(id), HttpStatus.OK);
+    public ResponseEntity<RestaurantsDTO> getRestaurant(@PathVariable Long id) {
+        return new ResponseEntity(restaurantsService.getRestaurant(id), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Restaurants>> getAll() {
-        return new ResponseEntity(restaurantService.getAll(), HttpStatus.OK);
+    @PostMapping
+    public ResponseEntity<RestaurantsDTO> createRestaurants(@RequestBody RestaurantsCreateRequest restaurantsCreateRequest) {
+        return new ResponseEntity(restaurantsService.createRestaurants(restaurantsCreateRequest), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity deleteById(@PathVariable Long id) {
-        restaurantService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping("{id}")
+    public ResponseEntity<RestaurantsDTO> updateRestaurants(@PathVariable Long id, @RequestBody RestaurantsUpdateRequest restaurantsUpdateRequest) {
+        return new ResponseEntity(restaurantsService.updateRestaurants(id, restaurantsUpdateRequest), HttpStatus.OK);
     }
+
 }

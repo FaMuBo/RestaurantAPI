@@ -1,16 +1,15 @@
 package com.exampleFinartz.demo.controllers;
 
 
-import com.exampleFinartz.demo.entity.Address;
+import com.exampleFinartz.demo.models.dto.AddressDTO;
+import com.exampleFinartz.demo.models.request.create.AddressCreateRequest;
 import com.exampleFinartz.demo.services.AddressService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/address")
+@RequestMapping("address")
 public class AddressController {
 
     private final AddressService addressService;
@@ -19,29 +18,14 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping
-    public ResponseEntity<Address> create(@RequestBody Address address) {
-        return new ResponseEntity(addressService.create(address), HttpStatus.CREATED);
-    }
-
     @GetMapping("{id}")
-    public ResponseEntity<Address> get(@PathVariable Long id) {
-        return new ResponseEntity(addressService.getById(id), HttpStatus.OK);
+    public ResponseEntity<AddressDTO> getAddress(@PathVariable Long id) {
+        return new ResponseEntity(addressService.getAddress(id), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Address>> getAll() {
-        return new ResponseEntity(addressService.getAll(), HttpStatus.OK);
+    @PostMapping
+    public ResponseEntity<AddressDTO> createAddress(@RequestBody AddressCreateRequest addressCreateRequest) {
+        return new ResponseEntity(addressService.createAddress(addressCreateRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<Address> update(@RequestBody Address address) {
-        return new ResponseEntity(addressService.update(address), HttpStatus.OK);
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<Address> deleteById(@PathVariable Long id) {
-        addressService.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }

@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.Basket;
+import com.exampleFinartz.demo.models.entity.BasketEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,15 +8,15 @@ import java.util.List;
 @Service
 public interface BasketService {
 
-    public Basket create(Basket basket);
+    public BasketEntity create(BasketEntity basketEntity);
 
-    public List<Basket> getAll();
+    public List<BasketEntity> getAll();
 
-    public Basket getById(Long id);
+    public BasketEntity getById(Long id);
 
-    public Basket update(Basket basket);
+    public BasketEntity update(BasketEntity basketEntity);
 
-    public Basket deleteById(Long id);
+    public BasketEntity deleteById(Long id);
 
     String delete(Long id);
 }

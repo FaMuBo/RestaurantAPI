@@ -1,23 +1,20 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.Comments;
+import com.exampleFinartz.demo.models.dto.CommentsDTO;
+import com.exampleFinartz.demo.models.request.create.CommentsCreateRequest;
+import com.exampleFinartz.demo.models.request.update.CommentsUpdateRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface CommentsService {
-    public Comments create(Comments comments);
 
-    public List<Comments> getAll();
+    CommentsDTO getComments(Long id);
 
-    public Comments getById(Long id);
+    CommentsDTO createComments(CommentsCreateRequest commentCreateRequest);
 
-    public Comments update(Comments comments);
+    CommentsDTO updateComments(Long id, CommentsUpdateRequest commentUpdateRequest);
 
-    public Comments deleteById(Long id);
-
-    String delete(Long id);
+    void deleteComments(Long id);
 
 
 }

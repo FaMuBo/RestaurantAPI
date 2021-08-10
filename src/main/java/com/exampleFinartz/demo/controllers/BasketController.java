@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.controllers;
 
-import com.exampleFinartz.demo.entity.Basket;
+import com.exampleFinartz.demo.models.entity.BasketEntity;
 import com.exampleFinartz.demo.services.BasketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,27 +17,27 @@ public class BasketController {
     private BasketService basketService;
 
     @PostMapping
-    public ResponseEntity<Basket> create(@RequestBody Basket basket) {
-        return new ResponseEntity(basketService.create(basket), HttpStatus.CREATED);
+    public ResponseEntity<BasketEntity> create(@RequestBody BasketEntity basketEntity) {
+        return new ResponseEntity(basketService.create(basketEntity), HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Basket> get(@PathVariable Long id) {
+    public ResponseEntity<BasketEntity> get(@PathVariable Long id) {
         return new ResponseEntity(basketService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Basket>> getAll() {
+    public ResponseEntity<List<BasketEntity>> getAll() {
         return new ResponseEntity(basketService.getAll(), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<Basket> update(@RequestBody Basket basket) {
-        return new ResponseEntity(basketService.update(basket), HttpStatus.OK);
+    public ResponseEntity<BasketEntity> update(@RequestBody BasketEntity basketEntity) {
+        return new ResponseEntity(basketService.update(basketEntity), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Basket> deleteById(@PathVariable Long id) {
+    public ResponseEntity<BasketEntity> deleteById(@PathVariable Long id) {
         basketService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

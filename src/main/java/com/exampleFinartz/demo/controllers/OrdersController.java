@@ -1,7 +1,7 @@
 package com.exampleFinartz.demo.controllers;
 
 
-import com.exampleFinartz.demo.entity.Orders;
+import com.exampleFinartz.demo.models.entity.OrdersEntity;
 import com.exampleFinartz.demo.services.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,29 +11,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/ordersEntity")
 public class OrdersController {
 
     @Autowired
     private OrdersService ordersService;
 
     @PostMapping
-    public ResponseEntity<Orders> create(@RequestBody Orders orders) {
-        return new ResponseEntity<Orders>(ordersService.create(orders), HttpStatus.CREATED);
+    public ResponseEntity<OrdersEntity> create(@RequestBody OrdersEntity ordersEntity) {
+        return new ResponseEntity<OrdersEntity>(ordersService.create(ordersEntity), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Orders> update(@RequestBody Orders orders) {
-        return new ResponseEntity<Orders>(ordersService.update(orders), HttpStatus.OK);
+    public ResponseEntity<OrdersEntity> update(@RequestBody OrdersEntity ordersEntity) {
+        return new ResponseEntity<OrdersEntity>(ordersService.update(ordersEntity), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Orders> get(@PathVariable Long id) {
-        return new ResponseEntity<Orders>(ordersService.getById(id), HttpStatus.OK);
+    public ResponseEntity<OrdersEntity> get(@PathVariable Long id) {
+        return new ResponseEntity<OrdersEntity>(ordersService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<Orders>> getAll() {
+    public ResponseEntity<List<OrdersEntity>> getAll() {
         return new ResponseEntity<>(ordersService.getAll(), HttpStatus.OK);
     }
 

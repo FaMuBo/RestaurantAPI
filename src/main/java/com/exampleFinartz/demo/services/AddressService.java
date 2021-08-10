@@ -1,26 +1,17 @@
 package com.exampleFinartz.demo.services;
 
 
-import com.exampleFinartz.demo.entity.Address;
+import com.exampleFinartz.demo.models.dto.AddressDTO;
+import com.exampleFinartz.demo.models.request.create.AddressCreateRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
 public interface AddressService {
 
-    public Address create(Address address);
+    AddressDTO getAddress(Long id);
 
-    public List<Address> getAll();
-
-    public Address getById(Long id);
-
-    public Address update(Address address);
-
-    public Address deleteById(Long id);
-
-    String delete(Long id);
+    AddressDTO createAddress(AddressCreateRequest addressCreateRequest);
 
 }
 

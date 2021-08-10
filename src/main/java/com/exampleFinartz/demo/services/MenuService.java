@@ -1,22 +1,16 @@
 package com.exampleFinartz.demo.services;
 
-import com.exampleFinartz.demo.entity.Menu;
+import com.exampleFinartz.demo.models.dto.MenuDTO;
+import com.exampleFinartz.demo.models.request.create.MenuCreateRequest;
+import com.exampleFinartz.demo.models.request.update.MenuUpdateRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public interface MenuService {
 
-    public Menu create(Menu menu);
+    MenuDTO getMenu(Long id);
 
-    public List<Menu> getAll();
+    MenuDTO createMenu(MenuCreateRequest menuCreateRequest);
 
-    public Menu getById(Long id);
-
-    public Menu update(Menu menu);
-
-    public Menu deleteById(Long id);
-
-    String delete(Long id);
+    MenuDTO updateMenu(Long id, MenuUpdateRequest menuUpdateRequest);
 }

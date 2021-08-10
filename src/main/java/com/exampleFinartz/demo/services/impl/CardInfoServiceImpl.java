@@ -1,6 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.CardInfo;
+import com.exampleFinartz.demo.models.entity.CardInfoEntity;
 import com.exampleFinartz.demo.repositories.CardInfoRepository;
 import com.exampleFinartz.demo.services.CardInfoService;
 
@@ -14,46 +14,46 @@ public class CardInfoServiceImpl implements CardInfoService {
         this.cardInfoRepository = CardInfoRepository;
     }
 
-    public List<CardInfo> findAll() {
+    public List<CardInfoEntity> findAll() {
         return cardInfoRepository.findAll();
     }
 
-    public CardInfo findById(Long id) {
+    public CardInfoEntity findById(Long id) {
         return cardInfoRepository.getById(id);
     }
 
     @Override
-    public CardInfo getById(Long id) {
+    public CardInfoEntity getById(Long id) {
         return cardInfoRepository.getById(id);
     }
 
     @Override
-    public List<CardInfo> getAll() {
+    public List<CardInfoEntity> getAll() {
         return cardInfoRepository.findAll();
     }
 
     @Override
-    public CardInfo create(CardInfo cardsInfo) {
+    public CardInfoEntity create(CardInfoEntity cardsInfo) {
         return cardInfoRepository.save(cardsInfo);
     }
 
     @Override
-    public CardInfo update(CardInfo cardInfo) {
-        CardInfo foundCardsInfo = cardInfoRepository.getById(cardInfo.getId());
-        if (cardInfo.getName() != null) {
-            foundCardsInfo.setName(cardInfo.getName());
+    public CardInfoEntity update(CardInfoEntity cardInfoEntity) {
+        CardInfoEntity foundCardsInfo = cardInfoRepository.getById(cardInfoEntity.getId());
+        if (cardInfoEntity.getName() != null) {
+            foundCardsInfo.setName(cardInfoEntity.getName());
         }
-        return cardInfoRepository.save(cardInfo);
+        return cardInfoRepository.save(cardInfoEntity);
     }
 
     @Override
-    public CardInfo deleteById(Long id) {
-        CardInfo cardInfo = cardInfoRepository.getById(id);
-        if (cardInfo != null) {
+    public CardInfoEntity deleteById(Long id) {
+        CardInfoEntity cardInfoEntity = cardInfoRepository.getById(id);
+        if (cardInfoEntity != null) {
             cardInfoRepository.deleteById(id);
-            return cardInfo;
+            return cardInfoEntity;
         }
-        return cardInfo;
+        return cardInfoEntity;
     }
 
     @Override

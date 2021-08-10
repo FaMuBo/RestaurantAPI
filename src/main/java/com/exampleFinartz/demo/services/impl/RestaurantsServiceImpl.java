@@ -1,75 +1,59 @@
 package com.exampleFinartz.demo.services.impl;
 
-import com.exampleFinartz.demo.entity.Restaurants;
-import com.exampleFinartz.demo.enums.Position;
+import com.exampleFinartz.demo.models.converter.dto.RestaurantsDtoConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.RestaurantsCreateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromUpdateRequest.RestaurantsUpdateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.dto.RestaurantsDTO;
+import com.exampleFinartz.demo.models.entity.RestaurantsEntity;
+import com.exampleFinartz.demo.models.enums.Position;
+import com.exampleFinartz.demo.models.request.create.RestaurantsCreateRequest;
+import com.exampleFinartz.demo.models.request.update.RestaurantsUpdateRequest;
 import com.exampleFinartz.demo.repositories.RestaurantsRepository;
 import com.exampleFinartz.demo.services.RestaurantsService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class RestaurantsServiceImpl implements RestaurantsService {
 
-
-    private RestaurantsRepository restaurantRepository;
-
-    public RestaurantsServiceImpl(RestaurantsRepository restaurantRepository) {
-        this.restaurantRepository = restaurantRepository;
-    }
+    private final RestaurantsRepository restaurantsRepository;
+    private final RestaurantsDtoConverter restaurantsDtoConverter;
+    private final RestaurantsCreateRequestToEntityConverter restaurantsCreateRequestToEntityConverter;
+    private final RestaurantsUpdateRequestToEntityConverter restaurantsUpdateRequestToEntityConverter;
 
     @Override
-    public Restaurants create(Restaurants restaurants) {
-        Restaurants save = restaurantRepository.save(restaurants);
-        return save;
-    }
-
-    @Override
-    public List<Restaurants> getAll() {
-        List<Restaurants> restaurants = restaurantRepository.findAll();
+    public List<RestaurantsDTO> getRestaurants(Position position) {
+        List<RestaurantsEntity> restaurantsEntities = restaurantsRepository.findByPosition(position);
+        List<RestaurantsDTO> restaurants = new ArrayList<>();
+        restaurantsEntities.forEach(restaurantsEntity -> {
+            restaurants.add(restaurantsDtoConverter.convert(restaurantsEntity));
+        });
         return restaurants;
     }
 
     @Override
-    public Restaurants getById(Long id) {
-        Restaurants restaurants = restaurantRepository.getById(id);
-        return restaurants;
-    }
-
-    public List<Restaurants> getByStatus(Position position) {
-        List<Restaurants> restaurants = restaurantRepository.findAllByPosition(Position.WAITING);
-        return restaurants;
+    public RestaurantsDTO getRestaurant(Long id) {
+        return restaurantsDtoConverter.convert(restaurantsRepository.getById(id));
     }
 
     @Override
-    public Restaurants update(Restaurants restaurants) {
-        Restaurants foundRestaurant = restaurantRepository.getById(restaurants.getId());
-        if (restaurants.getName() != null) {
-            foundRestaurant.setName(restaurants.getName());
-        }
-        if (restaurants.getBranch() != null) {
-            foundRestaurant.setBranch(restaurants.getBranch());
-        }
-        if (restaurants.getUser() != null) {
-            foundRestaurant.setUser(restaurants.getUser());
-        }
-        if (restaurants.getPosition() != null) {
-            foundRestaurant.setPosition(restaurants.getPosition());
-        }
-        return restaurantRepository.save(restaurants);
+    public RestaurantsDTO createRestaurants(RestaurantsCreateRequest restaurantsCreateRequest) {
+        RestaurantsEntity restaurantsEntity = restaurantsCreateRequestToEntityConverter.convert(restaurantsCreateRequest);
+        return restaurantsDtoConverter.convert(restaurantsRepository.save(restaurantsEntity));
     }
 
     @Override
-    public Restaurants deleteById(Long id) {
-        Restaurants restaurants = restaurantRepository.getById(id);
-        if (restaurants != null) {
-            restaurantRepository.deleteById(id);
-            return restaurants;
-        }
-        return restaurants;
+    public RestaurantsDTO updateRestaurants(Long id, RestaurantsUpdateRequest restaurantsUpdateRequest) {
+        RestaurantsEntity restaurantsExisted = restaurantsRepository.getById(id);
+        RestaurantsEntity restaurantsUpdated =
+                restaurantsUpdateRequestToEntityConverter.convert(restaurantsUpdateRequest, restaurantsExisted);
+
+        return restaurantsDtoConverter.convert(restaurantsRepository.save(restaurantsUpdated));
+
     }
 
-    @Override
-    public String delete(Long id) {
-        restaurantRepository.deleteById(id);
-        return "SUCCESS";
-    }
 }
