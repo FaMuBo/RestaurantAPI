@@ -3,9 +3,11 @@ package com.exampleFinartz.demo.services.impl;
 import com.exampleFinartz.demo.models.entity.CardInfoEntity;
 import com.exampleFinartz.demo.repositories.CardInfoRepository;
 import com.exampleFinartz.demo.services.CardInfoService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CardInfoServiceImpl implements CardInfoService {
 
     private final CardInfoRepository cardInfoRepository;

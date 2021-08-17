@@ -10,7 +10,7 @@ import java.util.List;
 public class UserCreateRequest {
 
     private long id;
-    private long password;
+    private String password;
     private String name;
     private Role role;
     private BasketDTO basket;

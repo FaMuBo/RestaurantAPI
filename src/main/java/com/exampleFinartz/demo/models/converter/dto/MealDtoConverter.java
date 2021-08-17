@@ -9,19 +9,28 @@ import com.exampleFinartz.demo.models.entity.BasketEntity;
 import com.exampleFinartz.demo.models.entity.ItemEntity;
 import com.exampleFinartz.demo.models.entity.MealEntity;
 import com.exampleFinartz.demo.models.entity.MenuEntity;
-import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Data
+
 public class MealDtoConverter implements GenericConverter<MealEntity, MealDTO> {
 
     private final GenericConverter<MenuEntity, MenuDTO> menuDtoConverter;
     private final GenericConverter<ItemEntity, ItemDTO> itemDtoConverter;
     private final GenericConverter<BasketEntity, BasketDTO> basketDtoConverter;
+
+    @Lazy
+    public MealDtoConverter(GenericConverter<MenuEntity, MenuDTO> menuDtoConverter,
+                            GenericConverter<ItemEntity, ItemDTO> itemDtoConverter,
+                            GenericConverter<BasketEntity, BasketDTO> basketDtoConverter) {
+        this.menuDtoConverter = menuDtoConverter;
+        this.itemDtoConverter = itemDtoConverter;
+        this.basketDtoConverter = basketDtoConverter;
+    }
 
     @Override
     public MealDTO convert(final MealEntity mealEntity) {
@@ -37,7 +46,7 @@ public class MealDtoConverter implements GenericConverter<MealEntity, MealDTO> {
         mealDto.setMenu(convert(mealEntity.getMenuEntity()));
 
         List<ItemDTO> items = new ArrayList<>();
-        mealEntity.getItemEntities().forEach(itemEntity -> {
+        mealEntity.getItemsEntities().forEach(itemEntity -> {
             items.add(convert(itemEntity));
         });
         mealDto.setItemDTOList(items);

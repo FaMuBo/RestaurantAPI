@@ -36,7 +36,7 @@ public class MealCreateRequestToEntityConverter implements GenericConverter<Meal
         mealCreateRequest.getItemDTOList().forEach(item -> {
             itemEntities.add(convert(item));
         });
-        mealEntity.setItemEntities(itemEntities);
+        mealEntity.setItemsEntities(itemEntities);
 
         return mealEntity;
     }

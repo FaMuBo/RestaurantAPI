@@ -18,6 +18,7 @@ import java.util.List;
 public class MealEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "meal_id")
     private long id;
 
     private String name;
@@ -25,15 +26,15 @@ public class MealEntity extends BaseEntity {
     private int price;
 
     @ManyToMany()
-    @JoinTable(name = "meal_item"
-            , joinColumns = @JoinColumn(name = "meal_id", referencedColumnName = "id", nullable = false)
-            , inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id", nullable = false))
-    private List<ItemEntity> itemEntities;
+//    @JoinColumn()
+    @JoinTable(name = "item_meal",
+            joinColumns = @JoinColumn(name = "meal_id", nullable = false)
+            , inverseJoinColumns = @JoinColumn(name = "item_id", nullable = false))
+    private List<ItemEntity> itemsEntities;
 
     @ManyToOne
     @JoinColumn(name = "menu_id", referencedColumnName = "id", nullable = false)
     private MenuEntity menuEntity;
-
 
 }
 

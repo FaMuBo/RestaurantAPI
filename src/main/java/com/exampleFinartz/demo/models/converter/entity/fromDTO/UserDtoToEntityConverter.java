@@ -26,6 +26,7 @@ public class UserDtoToEntityConverter implements GenericConverter<UserDTO, UserE
         userEntity.setName(user.getName());
         userEntity.setEmail(user.getEmail());
         userEntity.setPassword(user.getPassword());
+        userEntity.setRoles(user.getRoles());
 
         return userEntity;
     }

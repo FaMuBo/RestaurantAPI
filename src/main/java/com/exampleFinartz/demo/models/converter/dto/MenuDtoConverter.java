@@ -7,15 +7,21 @@ import com.exampleFinartz.demo.models.dto.MenuDTO;
 import com.exampleFinartz.demo.models.entity.BranchEntity;
 import com.exampleFinartz.demo.models.entity.MealEntity;
 import com.exampleFinartz.demo.models.entity.MenuEntity;
-import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+
 public class MenuDtoConverter implements GenericConverter<MenuEntity, MenuDTO> {
 
     private final GenericConverter<BranchEntity, BranchDTO> branchDtoConverter;
     private final GenericConverter<MealEntity, MealDTO> menulistDtoConverter;
+
+    @Lazy
+    public MenuDtoConverter(GenericConverter<BranchEntity, BranchDTO> branchDtoConverter, GenericConverter<MealEntity, MealDTO> menulistDtoConverter) {
+        this.branchDtoConverter = branchDtoConverter;
+        this.menulistDtoConverter = menulistDtoConverter;
+    }
 
 
     @Override

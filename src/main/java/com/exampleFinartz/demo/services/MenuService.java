@@ -12,5 +12,7 @@ public interface MenuService {
 
     MenuDTO createMenu(MenuCreateRequest menuCreateRequest);
 
+    MenuDTO getBranchMenu(Long branch_id);
+
     MenuDTO updateMenu(Long id, MenuUpdateRequest menuUpdateRequest);
 }

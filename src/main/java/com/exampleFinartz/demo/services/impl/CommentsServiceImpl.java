@@ -2,7 +2,7 @@ package com.exampleFinartz.demo.services.impl;
 
 import com.exampleFinartz.demo.models.converter.dto.CommentsDtoConverter;
 import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.CommentsCreateRequestToEntityConverter;
-import com.exampleFinartz.demo.models.converter.entity.fromUpdateRequest.CommentUpdateRequestToEntityConverter;
+import com.exampleFinartz.demo.models.converter.entity.fromUpdateRequest.CommentsUpdateRequestToEntityConverter;
 import com.exampleFinartz.demo.models.dto.CommentsDTO;
 import com.exampleFinartz.demo.models.entity.CommentsEntity;
 import com.exampleFinartz.demo.models.request.create.CommentsCreateRequest;
@@ -19,7 +19,7 @@ public class CommentsServiceImpl implements CommentsService {
     private final CommentsRepository commentsRepository;
     private final CommentsDtoConverter commentsDtoConverter;
     private final CommentsCreateRequestToEntityConverter commentsCreateRequestToEntityConverter;
-    private final CommentUpdateRequestToEntityConverter commentsUpdateRequestToEntityConverter;
+    private final CommentsUpdateRequestToEntityConverter commentsUpdateRequestToEntityConverter;
 
 
     @Override

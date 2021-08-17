@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CommentUpdateRequestToEntityConverter {
+public class CommentsUpdateRequestToEntityConverter {
 
     public CommentsEntity convert(final CommentsUpdateRequest commentsUpdateRequest,
                                   final CommentsEntity commentsExisted) {

@@ -1,5 +1,6 @@
 package com.exampleFinartz.demo.services.impl;
 
+import com.exampleFinartz.demo.exception.EntityNotFoundException;
 import com.exampleFinartz.demo.models.converter.dto.ItemDtoConverter;
 import com.exampleFinartz.demo.models.converter.entity.fromCreateRequest.ItemCreateRequestToEntityConverter;
 import com.exampleFinartz.demo.models.dto.ItemDTO;
@@ -38,12 +39,12 @@ public class ItemServiceImpl implements ItemService {
         return items;
     }
 
-//    @Override
-//    public ItemDTO getItem(Long id){
-//        return itemDtoConverter.convert(itemRepository.findById(id).orElseThrow(
-//                () -> new ResourceNotFoundException("Not found Item with id: " + id)
-//        ));
-//    }
+    @Override
+    public ItemDTO getItem(Long id) {
+        return itemDtoConverter.convert(itemRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Not found Item with id: " + id)
+        ));
+    }
 
     @Override
     public ItemDTO createItem(ItemCreateRequest itemCreateRequest) {

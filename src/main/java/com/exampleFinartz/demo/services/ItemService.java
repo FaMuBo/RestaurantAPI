@@ -8,10 +8,11 @@ import java.util.List;
 
 @Service
 public interface ItemService {
-    List<ItemDTO> getItems(Integer pageNo, Integer pageSize, String sortBy);
+   List<ItemDTO> getItems(Integer pageNo, Integer pageSize, String sortBy);
 
-//    ItemDTO getItem(Long id);
+    ItemDTO getItem(Long id);
 
     ItemDTO createItem(ItemCreateRequest itemCreateRequest);
+
 
 }

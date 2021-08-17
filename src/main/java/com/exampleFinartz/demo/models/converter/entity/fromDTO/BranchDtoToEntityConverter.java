@@ -25,7 +25,7 @@ public class BranchDtoToEntityConverter implements GenericConverter<BranchDTO, B
         branchEntity.setId(branch.getId());
         branchEntity.setName(branch.getName());
         branchEntity.setPosition(branch.getPosition());
-        branchEntity.setRestaurantsEntity(convert(branch.getRestaurants()));
+        branchEntity.setRestaurantEntity(convert(branch.getRestaurants()));
 
 
         return branchEntity;

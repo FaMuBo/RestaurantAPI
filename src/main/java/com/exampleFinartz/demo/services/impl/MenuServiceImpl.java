@@ -34,6 +34,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public MenuDTO getBranchMenu(Long branch_id) {
+        return menuDtoConverter.convert(menuRepository.getMenuEntityByBranchEntity_Id(branch_id));
+    }
+
+    @Override
     public MenuDTO updateMenu(Long id, MenuUpdateRequest menuUpdateRequest) {
         MenuEntity menuExisted = menuRepository.getById(id);
 

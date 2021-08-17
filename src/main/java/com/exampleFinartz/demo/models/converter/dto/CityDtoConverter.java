@@ -1,21 +1,23 @@
 package com.exampleFinartz.demo.models.converter.dto;
 
 import com.exampleFinartz.demo.models.converter.GenericConverter;
-import com.exampleFinartz.demo.models.dto.AddressDTO;
 import com.exampleFinartz.demo.models.dto.CityDTO;
-import com.exampleFinartz.demo.models.dto.CountyDTO;
-import com.exampleFinartz.demo.models.entity.AddressEntity;
 import com.exampleFinartz.demo.models.entity.CityEntity;
-import com.exampleFinartz.demo.models.entity.CountyEntity;
-import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+
 public class CityDtoConverter implements GenericConverter<CityEntity, CityDTO> {
 
-    private final GenericConverter<AddressEntity, AddressDTO> addressDtoConverter;
-    private final GenericConverter<CountyEntity, CountyDTO> countyDtoConverter;
+    //  private final GenericConverter<AddressEntity, AddressDTO> addressDtoConverter;
+    // private final GenericConverter<CountyEntity, CountyDTO> countyDtoConverter;
+
+    // public CityDtoConverter(@Lazy GenericConverter<AddressEntity, AddressDTO> addressDtoConverter,
+    //   @Lazy GenericConverter<CountyEntity, CountyDTO> countyDtoConverter) {
+
+//        this.addressDtoConverter = addressDtoConverter;
+//        this.countyDtoConverter = countyDtoConverter;
+//    }
 
     @Override
     public CityDTO convert(final CityEntity cityEntity) {
@@ -32,14 +34,14 @@ public class CityDtoConverter implements GenericConverter<CityEntity, CityDTO> {
         return cityDto;
 
     }
-
-    private AddressDTO convert(final AddressEntity addressEntity) {
-        return addressDtoConverter.convert(addressEntity);
-    }
-
-    private CountyDTO convert(final CountyEntity countyEntity) {
-        return countyDtoConverter.convert(countyEntity);
-    }
+//
+//    private AddressDTO convert(final AddressEntity addressEntity) {
+//        return addressDtoConverter.convert(addressEntity);
+//    }
+//
+//    private CountyDTO convert(final CountyEntity countyEntity) {
+//        return countyDtoConverter.convert(countyEntity);
+//    }
 
 
 }

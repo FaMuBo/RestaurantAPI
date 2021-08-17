@@ -18,6 +18,7 @@ import java.util.List;
 public class ItemEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "item_id")
     private long id;
 
     @Column(name = "name")
@@ -27,7 +28,6 @@ public class ItemEntity extends BaseEntity {
     private String unitType;
 
     @ManyToMany(mappedBy = "itemsEntities")
-    private List<MealEntity> mealEntityList;
-
+    private List<MealEntity> mealEntities;
 
 }

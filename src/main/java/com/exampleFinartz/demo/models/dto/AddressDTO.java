@@ -1,8 +1,10 @@
 package com.exampleFinartz.demo.models.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class AddressDTO {
 
     private Long id;
@@ -13,6 +15,7 @@ public class AddressDTO {
     private BranchDTO branch;
     private String district;
     private String other_content;
+
 
 //    public void setCountyEntity(CountyDTO convert) {
 //    }

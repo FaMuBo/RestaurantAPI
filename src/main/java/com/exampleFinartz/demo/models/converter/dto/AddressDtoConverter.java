@@ -3,11 +3,11 @@ package com.exampleFinartz.demo.models.converter.dto;
 import com.exampleFinartz.demo.models.converter.GenericConverter;
 import com.exampleFinartz.demo.models.dto.*;
 import com.exampleFinartz.demo.models.entity.*;
-import lombok.Data;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+
 public class AddressDtoConverter implements GenericConverter<AddressEntity, AddressDTO> {
 
 
@@ -15,6 +15,17 @@ public class AddressDtoConverter implements GenericConverter<AddressEntity, Addr
     private final GenericConverter<CountyEntity, CountyDTO> countyDTOConverter;
     private final GenericConverter<UserEntity, UserDTO> userDTOConverter;
     private final GenericConverter<BranchEntity, BranchDTO> branchDTOConverter;
+
+    public AddressDtoConverter(@Lazy GenericConverter<CityEntity, CityDTO> cityDTOConverter,
+                               GenericConverter<CountyEntity, CountyDTO> countyDTOConverter,
+                               GenericConverter<UserEntity, UserDTO> userDTOConverter,
+                               GenericConverter<BranchEntity, BranchDTO> branchDTOConverter) {
+
+        this.cityDTOConverter = cityDTOConverter;
+        this.countyDTOConverter = countyDTOConverter;
+        this.userDTOConverter = userDTOConverter;
+        this.branchDTOConverter = branchDTOConverter;
+    }
 
     @Override
     public AddressDTO convert(final AddressEntity addressEntity) {

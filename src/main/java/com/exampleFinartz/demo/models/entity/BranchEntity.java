@@ -48,7 +48,7 @@ public class BranchEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
-    private RestaurantsEntity restaurantsEntity;
+    private RestaurantsEntity restaurantEntity;
 
     @OneToOne(mappedBy = "branchEntity")
     private MenuEntity menuEntity;

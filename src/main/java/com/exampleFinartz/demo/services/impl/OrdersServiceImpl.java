@@ -3,9 +3,11 @@ package com.exampleFinartz.demo.services.impl;
 import com.exampleFinartz.demo.models.entity.OrdersEntity;
 import com.exampleFinartz.demo.repositories.OrdersRepository;
 import com.exampleFinartz.demo.services.OrdersService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrdersServiceImpl implements OrdersService {
 
 

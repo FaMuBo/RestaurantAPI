@@ -21,7 +21,7 @@ public class ItemController {
 
     @GetMapping("{id}")
     public ResponseEntity<ItemDTO> getItem(@PathVariable Long id) {
-        return new ResponseEntity(itemService.getItems(id), HttpStatus.OK);
+        return new ResponseEntity(itemService.getItem(id), HttpStatus.OK);
     }
 
     @GetMapping

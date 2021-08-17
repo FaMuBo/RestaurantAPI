@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("city")
 public class CityController {
-
+//değişiklik oldu.
     private final CityService cityService;
 
     public CityController(CityService cityService) {

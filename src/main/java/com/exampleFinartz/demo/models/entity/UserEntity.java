@@ -1,20 +1,20 @@
 package com.exampleFinartz.demo.models.entity;
 
+import com.exampleFinartz.demo.models.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-@Table(name = "user")
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "users")
 
 public class UserEntity extends BaseEntity {
     @Id
@@ -22,13 +22,19 @@ public class UserEntity extends BaseEntity {
     private long id;
 
     @Column(unique = true)
-    private long password;
+    private String password;
     private String name;
     private String email;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "role")
-//    private Role role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user", joinColumns = @JoinColumn(name = "id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private List<Role> roles;
 
     @OneToOne
     private BasketEntity basketEntity;
